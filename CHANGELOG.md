@@ -1,4 +1,41 @@
-## Enso Changelog
+## Laravel Enso's Changelog
+### 2.3.4
+Improves the main modal component. Now the component uses a render function to make the modal a direct child of the body.
+Upgrades the modal for vuedatatable and formbuilder.
+
+### 2.3.3
+Fixes laravel-enso/enso#66
+Adds mongolian language
+
+### 2.3.2
+Fixes laravel-enso/enso#64
+
+### 2.3.1
+Fixes laravel-enso/vuedatatable#29.
+Fixes laravel-enso/enso#63.
+Fixes laravel-enso/enso#56
+
+Puts all the auth routes to the except array for `VerifyCsrfToken` middleware
+```
+protected $except = ['api/login', 'api/password/email', 'api/password/reset'];
+```
+(you should do this step manually for existing projects)
+
+### 2.3.0
+Please follow the upgrade [instructions](https://github.com/laravel-enso/Enso/issues/62)
+
+### 2.2.2
+Packages updates. Bug fixes
+
+### 2.2.1
+Fixes bug in VueSelect & adds auto scroll when using keyboard navigation.
+
+### 2.2.0
+Removes vue-multiselect dependency. VueSelect has been rebuild from scratch and is now bulma themed. The option list builder has been upgraded too. Helpers/Enum has now an select() method that maps the $data to the expected format. VueSelect now uses an array of objects with the following format: [{id: 3, name: 'Label'}]. Select docs will be updated soon.
+Upgrades the whole project for VueSelect, including the example page.
+Fixes laravel-enso/vuedatatable#53
+Fixes laravel-enso/enso#54
+Fixes laravel-core/core#41
 
 ### 2.1.35
 Adds `is_active` to languages table. A command will run "post-install" / "post-update".

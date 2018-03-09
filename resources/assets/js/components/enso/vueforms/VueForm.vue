@@ -63,8 +63,9 @@
                                 :has-error="errors.has(field.name)"
                                 @input="errors.clear(field.name);"
                                 v-model="field.value"
+                                :label="field.meta.label || 'name'"
+                                :track-by="field.meta.trackBy || 'id'"
                                 :options="field.meta.options"
-                                :key-map="field.meta.keyMap"
                                 :source="field.meta.source"
                                 :multiple="field.meta.multiple"
                                 :disabled="field.meta.disabled"
@@ -106,7 +107,7 @@
                 v-if="data.actions.destroy"
                 :disabled="data.actions.destroy.forbidden"
                 :class="data.actions.destroy.button.class"
-                @click.prevent="showModal = true">
+                @click.prevent="modal = true">
                 <span>{{ __(data.actions.destroy.button.label) }}</span>
                 <span class="icon">
                     <fa :icon="data.actions.destroy.button.icon"></fa>
@@ -145,10 +146,10 @@
             <div class="is-clearfix"></div>
         </form>
         <modal v-if="data.actions.destroy"
-            :show="showModal"
+            :show="modal"
             :__="__"
             :message="data.actions.destroy.button.message"
-            @cancel="showModal = false"
+            @close="modal = false"
             @commit="destroy()">
         </modal>
     </div>
@@ -190,7 +191,7 @@ export default {
     data() {
         return {
             loading: false,
-            showModal: false,
+            modal: false,
             errors: new Errors(),
         };
     },
@@ -246,7 +247,7 @@ export default {
             }, { _params: this.params });
         },
         destroy() {
-            this.showModal = false;
+            this.modal = false;
             this.loading = true;
 
             axios.delete(this.data.actions.destroy.path).then(({ data }) => {

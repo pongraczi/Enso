@@ -1,10 +1,10 @@
 <template>
 
-    <section class="hero login is-fullheight is-primary is-bold">
+    <section class="hero is-fullheight is-primary is-bold">
         <div class="hero-body">
             <div class="container">
-                <div class="columns is-mobile is-centered">
-                    <router></router>
+                <div class="columns is-centered">
+                    <router v-if="$route.meta.guestGuard"></router>
                 </div>
             </div>
         </div>
@@ -28,10 +28,6 @@ export default {
     },
 
     created() {
-        if (!this.$route || !this.$route.meta.guestGuard) {
-            this.$router.push({ name: 'login' });
-        }
-
         axios.get('/api/getMeta').then(({ data }) => {
             this.setMeta(data);
         }).catch(error => this.handleError(error));
